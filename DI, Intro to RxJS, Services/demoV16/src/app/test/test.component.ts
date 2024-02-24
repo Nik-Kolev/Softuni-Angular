@@ -1,5 +1,5 @@
 import { AppComponent } from './../app.component';
-import { myCustomToken } from './../app.module';
+import { myCustomToken, MyClass } from './../app.module';
 import {
   Component,
   Input,
