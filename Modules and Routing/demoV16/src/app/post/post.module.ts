@@ -5,8 +5,8 @@ import { Test } from '../test';
 
 @NgModule({
   declarations: [ListComponent],
-  imports: [CommonModule],
   providers: [Test],
+  imports: [CommonModule],
   exports: [ListComponent],
 })
-export class UserModule {}
+export class PostModule {}

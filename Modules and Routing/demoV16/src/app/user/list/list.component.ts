@@ -1,3 +1,4 @@
+import { Test } from './../../test';
 import { IUser } from './../../shared/interfaces';
 import { GlobalLoaderService } from './../../core/global-loader.service';
 import { UserService } from './../user.service';
@@ -11,8 +12,11 @@ export class ListComponent {
   userList: IUser[] | null = null;
   constructor(
     private userService: UserService,
-    private globalLoaderService: GlobalLoaderService
-  ) {}
+    private globalLoaderService: GlobalLoaderService,
+    private t: Test
+  ) {
+    (window as any).t2 = t;
+  }
 
   ngOnInit(): void {
     this.loadUsers();
