@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ThemeListComponent } from './theme-list/theme-list.component';
 import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 import { MainComponent } from './main/main.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { MainComponent } from './main/main.component';
     RecentPostsComponent,
     MainComponent,
   ],
-  imports: [BrowserModule, CoreModule, HttpClientModule, SharedModule],
+  imports: [BrowserModule, CoreModule, HttpClientModule, SharedModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
