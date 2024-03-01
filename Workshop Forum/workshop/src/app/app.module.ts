@@ -12,6 +12,7 @@ import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HomeComponent } from './home/home.component';
     RecentPostsComponent,
     MainComponent,
     HomeComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

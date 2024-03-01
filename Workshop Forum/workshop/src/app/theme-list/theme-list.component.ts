@@ -1,3 +1,4 @@
+import { UserService } from './../user/user.service';
 import { Theme } from './../interfaces/theme';
 import { ApiService } from './../api.service';
 import { Component } from '@angular/core';
@@ -11,7 +12,10 @@ export class ThemeListComponent {
   themeList: Theme[] | null = null;
   errorFetchingData = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.apiService.loadThemes().subscribe({
@@ -24,5 +28,9 @@ export class ThemeListComponent {
         console.log(err);
       },
     });
+  }
+
+  get isLogged(): boolean {
+    return !!this.userService.isLogged;
   }
 }

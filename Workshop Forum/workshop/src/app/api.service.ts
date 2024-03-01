@@ -11,6 +11,10 @@ const apiURL = environment.apiURL;
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
+  loadSingleTheme(id: string) {
+    return this.httpClient.get<Theme>(`${apiURL}/themes/${id}`);
+  }
+
   loadThemes() {
     return this.httpClient.get<Theme[]>(`${apiURL}/themes`);
   }
