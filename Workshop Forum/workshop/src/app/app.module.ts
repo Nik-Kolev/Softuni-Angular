@@ -13,6 +13,7 @@ import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +23,16 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MainComponent,
     HomeComponent,
     WelcomeComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
     CoreModule,
     HttpClientModule,
     SharedModule,
-    AppRoutingModule,
     UserModule,
     ThemeModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
