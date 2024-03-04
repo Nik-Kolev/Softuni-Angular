@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="login" action="" method="post">
+  <form class="login" #form="ngForm" (ngSubmit)="login(form)">
     <fieldset>
       <h2>Login Form</h2>
 
@@ -13,13 +13,22 @@
           name="email"
           id="email"
           placeholder="john.doe@gmail.com"
-          #inputEmail
+          #inputEmail="ngModel"
+          ngModel
+          required
+          [appEmail]="emailDomains"
         />
       </p>
-      <p class="error">Email is required!</p>
-      <!-- <p class="error">
-                    Email is not valid!
-                </p> -->
+
+      <ng-container *ngIf="inputEmail.touched">
+        <p class="error" *ngIf="inputEmail.errors?.['required']">
+          Email is required!
+        </p>
+        <p class="error" *ngIf="inputEmail.errors?.['emailValidator']">
+          Email is not valid!
+        </p>
+      </ng-container>
+      <!-- {{ inputEmail?.errors | json }} -->
 
       <p class="field field-icon">
         <label for="password"
@@ -30,17 +39,26 @@
           name="password"
           id="password"
           placeholder="******"
-          #inputPassword
+          #inputPassword="ngModel"
+          ngModel
+          required
+          minlength="5"
         />
       </p>
-      <!-- <p class="error">
-                    Password is required!
-                </p>
-                <p class="error">
-                    Password must be at least 4 characters!
-                </p> -->
+      <ng-container *ngIf="inputPassword.touched">
+        <p class="error" *ngIf="inputPassword.errors?.['required']">
+          Password is required!
+        </p>
+        <p class="error" *ngIf="inputPassword.errors?.['minlength']">
+          Password must be at least
+          {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
+        </p>
+      </ng-container>
 
-      <button (click)="login(inputEmail.value, inputPassword.value)">
+      <button
+        [style]="{ backgroundColor: form.invalid ? 'grey' : 'blue' }"
+        disabled="form.invalid"
+      >
         Login
       </button>
 
@@ -50,4 +68,5 @@
       </p>
     </fieldset>
   </form>
+  <!-- {{ form.value | json }} -->
 </div>
