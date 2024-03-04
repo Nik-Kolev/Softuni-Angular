@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { ApiService } from './../../api.service';
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-theme',
@@ -18,5 +19,13 @@ export class NewThemeComponent {
 
   cancelTheme(): void {
     this.route.navigate(['/home']);
+  }
+
+  newThemeSubmitHandler(form: NgForm): void{
+    if (form.invalid){
+      return
+    }
+
+    console.log(form.value)
   }
 }

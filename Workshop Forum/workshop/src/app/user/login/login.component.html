@@ -57,7 +57,7 @@
 
       <button
         [style]="{ backgroundColor: form.invalid ? 'grey' : 'blue' }"
-        disabled="form.invalid"
+        [disabled]="form.invalid"
       >
         Login
       </button>

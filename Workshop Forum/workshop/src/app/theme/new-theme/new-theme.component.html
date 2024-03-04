@@ -3,13 +3,17 @@
     <div class="header-background">
       <span>New Theme</span>
     </div>
-    <form>
+    <form #form="ngForm" (ngSubmit)="newThemeSubmitHandler(form)">
       <div class="new-theme-title">
         <label for="themeName">Title <span class="red">*</span></label>
-        <input type="text" name="themeName" id="themeName" #inputThemeName />
-        <p class="error">Theme name is required.</p>
-        <p class="error">Theme name must be at least 5 characters long.</p>
+        <input type="text" name="themeName" id="themeName" #inputThemeName="ngModel" ngModel required/>
+
+        <ng-container *ngIf="inputThemeName.touched">
+          <p class="error" *ngIf="inputThemeName.errors?.['required']">Theme name is required.</p>
+          <p class="error" *ngIf="inputThemeName.errors?.['minlength']">Theme name must be at least 5 characters long.</p>
+        </ng-container>
       </div>
+
       <div class="new-theme-content">
         <label for="postText">Post <span class="red">*</span></label>
         <textarea
@@ -18,16 +22,23 @@
           id="postText"
           rows="8"
           class="height"
-          #inputPostText
+          #inputPostText="ngModel"
+          ngModel
+          required
+          minlength="10"
         ></textarea>
-        <p class="error">The field with your post is required.</p>
-        <p class="error">Post must be at least 10 characters long.</p>
+        <ng-container *ngIf="inputPostText.touched">
+          <p class="error" *ngIf="inputPostText.errors?.['required']">The field with your post is required.</p>
+          <p class="error" *ngIf="inputPostText.errors?.['minlength']">Post must be at least 10 characters long.</p>
+        </ng-container>
       </div>
+
       <div class="new-theme-buttons">
         <button class="cancel" (click)="cancelTheme()">Cancel</button>
         <button
           class="public"
           (click)="postTheme(inputThemeName.value, inputPostText.value, $event)"
+          [disabled]="form.invalid"
         >
           Post
         </button>
