@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { interval, map } from 'rxjs';
 import { UserService } from './user.service';
 
@@ -7,7 +7,7 @@ import { UserService } from './user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'demoV16';
   user = { name: 'pesho', age: 12, list: [1, 2, 3, 4, 5, 6, 7, 8] };
 
@@ -32,12 +32,10 @@ export class AppComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit(): void {
-    this.userService.loadUsers().subscribe({
-      next: console.log,
-      error: (err) => {
-        console.log(`Error from appComponent ${err}`);
-      },
-    });
+  users$ = this.userService.userObs$;
+  isLoading$ = this.userService.isLoading$;
+
+  reloadUser(): void {
+    this.userService.loadUsers();
   }
 }

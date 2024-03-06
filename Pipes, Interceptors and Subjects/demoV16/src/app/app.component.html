@@ -15,3 +15,22 @@
 <div>
   {{ time$ | async | date : "hh:mm:ss" }}
 </div>
+
+<!-- <nav>
+  <div><a routerLink="/home">Home</a></div>
+  <div><a routerLink="/lazy">Lazy</a></div>
+</nav> -->
+
+<div *ngIf="isLoading$ | async">Loading ...</div>
+<div *ngIf="!(isLoading$ | async)">
+  {{ users$ | async | json }}
+</div>
+
+<button (click)="reloadUser()" *ngIf="(users$ | async) === null">
+  Load Users
+</button>
+<button (click)="reloadUser()" *ngIf="(users$ | async) !== null">
+  Reload Users
+</button>
+
+<router-outlet />
