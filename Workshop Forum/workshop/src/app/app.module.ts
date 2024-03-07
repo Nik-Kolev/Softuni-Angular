@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { appInterceptorProvider } from './app.interceptor';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { appInterceptorProvider } from './app.interceptor';
     HomeComponent,
     WelcomeComponent,
     ErrorPageComponent,
+    AuthenticateComponent,
   ],
   imports: [
     BrowserModule,
