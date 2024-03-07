@@ -14,10 +14,14 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private route: Router) {}
   login(form: NgForm): void {
+    console.log(form);
     if (form.invalid) {
       return;
     }
-    this.userService.login();
-    this.route.navigate(['/home']);
+    const { email, password } = form.value;
+
+    this.userService.login(email, password).subscribe(() => {
+      this.route.navigate(['/themes']);
+    });
   }
 }

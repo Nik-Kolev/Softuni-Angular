@@ -1,5 +1,4 @@
 import { ThemeModule } from './theme/theme.module';
-import { UserModule } from './user/user.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
@@ -14,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { appInterceptorProvider } from './app.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,11 +30,10 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     CoreModule,
     HttpClientModule,
     SharedModule,
-    UserModule,
     ThemeModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
