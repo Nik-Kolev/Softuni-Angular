@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DEFAULT_EMAIL_DOMAINS } from 'src/app/shared/constants';
 import { emailValidator } from 'src/app/shared/validators/email.validator';
+import { UserService } from '../user.service';
 
 interface Profile {
   username: string;
@@ -14,14 +15,14 @@ interface Profile {
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   isEditMode: boolean = false;
 
   // profileDetails: Profile | undefined;
   profileDetails = {
-    username: 'John',
-    email: 'John.asd@gmail.com',
-    tel: '123 321 123',
+    username: '',
+    email: '',
+    tel: '',
   };
 
   form = this.fb.group({
@@ -29,7 +30,23 @@ export class ProfileComponent {
     email: ['', [Validators.required, emailValidator(DEFAULT_EMAIL_DOMAINS)]],
     tel: [''],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
+
+  ngOnInit(): void {
+    const { username, email, tel } = this.userService.user!;
+
+    this.profileDetails = {
+      username,
+      email,
+      tel,
+    };
+
+    this.form.setValue({
+      username,
+      email,
+      tel,
+    });
+  }
 
   toggleEditMode(): void {
     this.isEditMode = !this.isEditMode;
@@ -41,9 +58,12 @@ export class ProfileComponent {
     }
 
     this.profileDetails = { ...this.form.value } as Profile;
+    const { username, email, tel } = this.profileDetails;
+
+    this.userService.updateProfile(username!, email!, tel!).subscribe(() => {
+      this.toggleEditMode();
+    });
 
     console.log(this.form.value);
-
-    this.toggleEditMode();
   }
 }
