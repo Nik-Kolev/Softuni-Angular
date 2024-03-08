@@ -19,9 +19,8 @@ export class ApiService {
     return this.httpClient.get<Theme[]>(`${apiURL}/themes`);
   }
 
-  postTheme(title: string, post: string): void {
-    const data = { title: title, post: post };
-    this.httpClient.post<Theme[]>(`${apiURL}/themes`, data);
+  postTheme(themeName: string, postText: string) {
+    return this.httpClient.post<Theme>('/api/themes', { themeName, postText });
   }
 
   loadPosts(limit?: number) {

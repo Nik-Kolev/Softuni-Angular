@@ -10,22 +10,18 @@ import { NgForm } from '@angular/forms';
 })
 export class NewThemeComponent {
   constructor(private apiService: ApiService, private route: Router) {}
-  postTheme(title: string, post: string, e: Event): void {
-    e.preventDefault();
-    console.log(title, post);
-    this.apiService.postTheme(title, post);
-    this.route.navigate(['/home']);
-  }
 
   cancelTheme(): void {
     this.route.navigate(['/home']);
   }
 
-  newThemeSubmitHandler(form: NgForm): void{
-    if (form.invalid){
-      return
+  newThemeSubmitHandler(form: NgForm): void {
+    if (form.invalid) {
+      return;
     }
-
-    console.log(form.value)
+    const { themeName, postText } = form.value;
+    this.apiService.postTheme(themeName, postText).subscribe(() => {
+      this.route.navigate(['/themes']);
+    });
   }
 }
